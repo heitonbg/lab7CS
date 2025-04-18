@@ -13,7 +13,7 @@ class Program
     tree.Add(10);
     tree.Add(11);
 
-    Func<BinaryTree<int>, IEnumerable<int>> inorder = t => t.InOrderTraversal();
+    Func<BinaryTree<int>, IEnumerable<int>> inorder = trees => trees.InOrderTraversal();
 
     Console.WriteLine("Симметричный обход:");
     foreach (var number in inorder(tree))
