@@ -46,7 +46,10 @@ internal class BinaryTree<T> : IEnumerable<T> where T : IComparable<T>
 
   public TreeNode<T> Next(TreeNode<T> currentNode)
   {
-    if (currentNode == null) return null;
+    if (currentNode == null) 
+    {
+      return null;
+    }
 
     if (currentNode.Right != null)
     {
@@ -69,7 +72,10 @@ internal class BinaryTree<T> : IEnumerable<T> where T : IComparable<T>
 
   public TreeNode<T> Previous(TreeNode<T> currentNode)
   {
-    if (currentNode == null) return null;
+    if (currentNode == null)
+    {
+      return null;
+    }
 
     if (currentNode.Left != null)
     {
@@ -112,7 +118,10 @@ internal class BinaryTree<T> : IEnumerable<T> where T : IComparable<T>
 
     IEnumerable<T> Traverse(TreeNode<T> node)
     {
-      if (node == null) yield break;
+      if (node == null) 
+      {
+        yield break;
+      }
 
       foreach (var leftNode in Traverse(node.Left))
       {
@@ -130,7 +139,10 @@ internal class BinaryTree<T> : IEnumerable<T> where T : IComparable<T>
 
   private TreeNode<T> FindLeftmostNode(TreeNode<T> currentNode)
   {
-    if (currentNode == null) return null;
+    if (currentNode == null) 
+    {
+      return null;
+    }
 
     while (currentNode.Left != null)
     {
