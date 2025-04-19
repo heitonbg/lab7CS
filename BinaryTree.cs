@@ -44,6 +44,58 @@ internal class BinaryTree<T> : IEnumerable<T> where T : IComparable<T>
     }
   }
 
+  public IEnumerable<T> PreOrderTraversal()
+  {
+    if (_root == null) yield break;
+
+    var stack = new Stack<TreeNode<T>>();
+    stack.Push(_root);
+
+    while (stack.Count > 0)
+    {
+      var node = stack.Pop();
+      yield return node.Data;
+
+      if (node.Right != null) 
+      {
+        stack.Push(node.Right);
+      }
+      if (node.Left != null) 
+      {
+        stack.Push(node.Left);
+      }
+    }
+  }
+
+  public IEnumerable<T> PostOrderTraversal()
+  {
+    if (_root == null) yield break;
+
+    var stack = new Stack<TreeNode<T>>();
+    var result = new Stack<T>();
+    stack.Push(_root);
+
+    while (stack.Count > 0)
+    {
+      var node = stack.Pop();
+      result.Push(node.Data);
+
+      if (node.Left != null) 
+      {
+        stack.Push(node.Left);
+      }
+      if (node.Right != null) 
+      {
+        stack.Push(node.Right);
+      }
+    }
+
+    while (result.Count > 0)
+    {
+      yield return result.Pop();
+    }
+  }
+
   public TreeNode<T> Next(TreeNode<T> currentNode)
   {
     if (currentNode == null) 
@@ -96,6 +148,13 @@ internal class BinaryTree<T> : IEnumerable<T> where T : IComparable<T>
     }
   }
 
+  public T Current(TreeNode<T> node) => node != null ? node.Data : throw new InvalidOperationException("Node пуст");
+
+    public TreeNode<T> GetRoot()
+    {
+        return _root;
+    }
+
   public IEnumerator<T> GetEnumerator()
   {
     TreeNode<T> currentNode = FindLeftmostNode(_root);
@@ -137,7 +196,7 @@ internal class BinaryTree<T> : IEnumerable<T> where T : IComparable<T>
     }
   }
 
-  private TreeNode<T> FindLeftmostNode(TreeNode<T> currentNode)
+  public TreeNode<T> FindLeftmostNode(TreeNode<T> currentNode)
   {
     if (currentNode == null) 
     {
